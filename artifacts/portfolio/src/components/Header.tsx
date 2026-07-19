@@ -4,6 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Sun, Moon, Menu, X, Home, User, Briefcase, Mail } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { SynapseSentinelIcon } from '@/components/SynapseSentinelIcon';
 
 const navItems = [
   { href: '/', labelKey: 'nav.home', icon: Home },
@@ -54,9 +55,10 @@ export function Header() {
         <div className="mx-auto flex h-16 items-center justify-between px-4 md:px-8">
           {/* Logo */}
           <Link href="/">
-            <div className="flex cursor-pointer items-center gap-2 group">
-              <span className="font-sans text-xl font-medium tracking-tight">
-                SYS.OP
+            <div className="flex cursor-pointer items-center gap-3 group">
+              <SynapseSentinelIcon size={32} />
+              <span className="font-display text-xl text-foreground group-hover:text-primary transition-colors duration-200 hidden sm:inline">
+                Synapse Sentinel
               </span>
             </div>
           </Link>
