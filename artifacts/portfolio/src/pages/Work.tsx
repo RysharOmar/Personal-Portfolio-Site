@@ -181,7 +181,8 @@ export default function Work() {
                           <span className="block font-sans text-xs uppercase tracking-widest text-muted-foreground mb-4">
                             {lang === 'ES' ? 'Métrica Clave' : 'Key Metric'}
                           </span>
-                          <span className="font-display text-4xl md:text-5xl text-primary leading-tight">
+                          <span className="font-display text-primary leading-tight"
+                            style={{ fontSize: 'clamp(1.25rem, 3.5vw, 2.75rem)' }}>
                             {project.metric}
                           </span>
                         </div>
