@@ -2,12 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageTransition } from '@/components/PageTransition';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Download, ShieldAlert, Code2, Cpu, Webhook, Quote } from 'lucide-react';
+import { Marquee } from '@/components/Marquee';
+import { ShieldAlert, Code2, Cpu, Webhook } from 'lucide-react';
 
 export default function About() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const skills = [
     {
@@ -34,147 +33,151 @@ export default function About() {
 
   return (
     <PageTransition>
-      <div className="container mx-auto px-4 md:px-8 py-12 max-w-5xl">
+      <div className="flex flex-col w-full">
         
-        {/* Header Section */}
-        <div className="mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-4 mb-6"
-          >
-            <div className="h-[2px] w-12 bg-primary"></div>
-            <span className="font-mono text-sm text-primary uppercase tracking-widest glow-text">
-              Whoami
-            </span>
-          </motion.div>
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-24 px-8 md:px-16 lg:px-24 max-w-7xl mx-auto w-full flex flex-col lg:flex-row justify-between items-start lg:items-center gap-16">
+          <div className="flex-1">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="font-display text-6xl md:text-8xl leading-[0.95] text-foreground"
+            >
+              Arquitectura,<br/>
+              Seguridad y<br/>
+              Automatización.
+            </motion.h1>
+          </div>
           
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold tracking-tighter mb-8"
-          >
-            {t('about.title')}
-          </motion.h1>
-
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg text-muted-foreground"
+            initial={{ opacity: 0, rotate: -5 }}
+            animate={{ opacity: 1, rotate: 2 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="hidden lg:flex flex-col items-center justify-center p-4 bg-white dark:bg-card border-8 border-white dark:border-card-border shadow-xl min-w-[240px]"
           >
-            <p className="leading-relaxed">{t('about.bio.1')}</p>
-            <p className="leading-relaxed">{t('about.bio.2')}</p>
+            <div className="bg-card w-full aspect-square flex flex-col items-center justify-center border border-border">
+              <span className="font-display text-7xl text-primary">8+</span>
+              <span className="font-sans text-xl uppercase tracking-widest text-muted-foreground mt-2">
+                {lang === 'ES' ? 'años' : 'years'}
+              </span>
+            </div>
+            <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground mt-4 w-full text-center">
+              Est. 2016
+            </p>
           </motion.div>
-        </div>
+        </section>
 
-        {/* Big Metric Social Proof */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="my-16 p-8 border border-primary/20 bg-primary/5 rounded-lg text-center relative overflow-hidden group"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
-          <p className="text-2xl md:text-3xl font-bold text-foreground max-w-3xl mx-auto">
-            {t('about.proof')}
-          </p>
-        </motion.div>
+        {/* Bio Section */}
+        <section className="px-8 md:px-16 lg:px-24 py-16 bg-card/30">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 relative">
+            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-foreground/10" />
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-sans text-xl md:text-2xl leading-relaxed text-foreground"
+            >
+              {t('about.bio.1')}
+            </motion.p>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="font-sans text-lg md:text-xl leading-relaxed text-muted-foreground"
+            >
+              {t('about.bio.2')}
+            </motion.p>
+          </div>
+        </section>
 
-        {/* Timeline & Skills Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
-          
-          {/* Timeline */}
-          <div>
-            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-              <span className="text-primary font-mono">{'>'}</span> {t('about.timeline.title')}
+        <Marquee items={['Pentesting', 'React', 'Node.js', 'LLMs', 'Python', 'Salesforce']} speed={25} />
+
+        {/* Skills Section */}
+        <section className="px-8 md:px-16 lg:px-24 py-24 max-w-5xl mx-auto w-full">
+          <h2 className="font-sans text-sm uppercase tracking-widest text-muted-foreground mb-16">
+            {t('about.skills.title')}
+          </h2>
+          <div className="flex flex-col gap-8">
+            {skills.map((group, i) => {
+              const Icon = group.icon;
+              return (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col md:flex-row md:items-center py-6 border-b border-foreground/10 group"
+                >
+                  <h3 className="font-sans font-medium uppercase tracking-widest w-48 mb-4 md:mb-0">
+                    {group.category}
+                  </h3>
+                  <div className="flex-1 font-sans text-lg text-muted-foreground">
+                    {group.items.join(' · ')}
+                  </div>
+                  <div className="hidden md:block">
+                    <Icon className="w-6 h-6 text-foreground/20 group-hover:text-primary transition-colors" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Authority Timeline */}
+        <section className="px-8 md:px-16 lg:px-24 py-24 bg-foreground text-background">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="font-sans text-sm uppercase tracking-widest text-background/50 mb-16">
+              {t('about.timeline.title')}
             </h2>
-            <div className="space-y-8 relative before:absolute before:inset-0 before:ml-[15px] before:w-[2px] before:bg-border md:before:ml-[15px]">
+            <div className="flex flex-col md:flex-row overflow-x-auto gap-12 md:gap-24 pb-8 snap-x">
               {[1, 2, 3, 4].map((item, i) => (
                 <motion.div 
                   key={i}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="relative pl-12"
+                  className="min-w-[280px] snap-start"
                 >
-                  <div className="absolute left-0 top-1.5 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center z-10 glow-border">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  </div>
-                  <h3 className="font-mono text-primary mb-1">{t(`about.timeline.${item}.year`)}</h3>
-                  <p className="text-foreground">{t(`about.timeline.${item}.desc`)}</p>
+                  <h3 className="font-display text-5xl md:text-7xl text-primary/80 mb-6">
+                    {t(`about.timeline.${item}.year`)}
+                  </h3>
+                  <p className="font-sans text-lg text-background/80">
+                    {t(`about.timeline.${item}.desc`)}
+                  </p>
                 </motion.div>
               ))}
             </div>
           </div>
+        </section>
 
-          {/* Skills */}
-          <div>
-            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-              <span className="text-primary font-mono">{'>'}</span> {t('about.skills.title')}
-            </h2>
-            <div className="space-y-6">
-              {skills.map((skillGroup, i) => {
-                const Icon = skillGroup.icon;
-                return (
-                  <motion.div 
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="p-4 border border-border/50 bg-card/30 backdrop-blur-sm rounded-lg hover:border-primary/30 transition-colors"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <Icon className="w-5 h-5 text-muted-foreground" />
-                      <h3 className="font-bold">{skillGroup.category}</h3>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {skillGroup.items.map((item, j) => (
-                        <Badge key={j} variant="outline" className="font-mono text-xs hover:bg-primary/10 hover:text-primary transition-colors cursor-default">
-                          {item}
-                        </Badge>
-                      ))}
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom Section: Testimonial & CV */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-24">
+        {/* Testimonial & CV */}
+        <section className="px-8 md:px-16 lg:px-24 py-32 max-w-4xl mx-auto w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="p-8 border border-border bg-card/50 rounded-lg relative"
           >
-            <Quote className="absolute top-4 left-4 w-12 h-12 text-muted/20" />
-            <p className="text-xl font-medium mb-4 relative z-10 italic text-foreground">
+            <blockquote className="font-display text-3xl md:text-5xl leading-tight text-foreground mb-12">
               {t('about.testimonial')}
-            </p>
-            <p className="font-mono text-sm text-primary uppercase">
-              — {t('about.testimonial.author')}
-            </p>
-          </motion.div>
+            </blockquote>
+            <div className="w-16 h-[1px] bg-primary mx-auto mb-8" />
+            <cite className="font-sans text-sm uppercase tracking-widest text-muted-foreground not-italic block mb-24">
+              {t('about.testimonial.author')}
+            </cite>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex justify-center md:justify-end"
-          >
-            <Button size="lg" className="font-mono gap-2 px-8">
-              <Download className="w-4 h-4" />
-              {t('about.cv')}
-            </Button>
+            <div className="flex flex-col items-center gap-8">
+              <p className="font-sans text-lg text-foreground max-w-lg">
+                {t('about.proof')}
+              </p>
+              <a href="#" className="inline-block border-b border-foreground pb-1 text-lg font-medium hover:border-primary hover:text-primary transition-colors">
+                {t('about.cv')} →
+              </a>
+            </div>
           </motion.div>
-        </div>
+        </section>
 
       </div>
     </PageTransition>
