@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 type Language = 'ES' | 'EN';
 
@@ -6,6 +6,7 @@ interface LanguageContextType {
   lang: Language;
   toggleLang: (l: Language) => void;
   t: (key: string) => string;
+  isTransitioning: boolean;
 }
 
 const translations: Record<string, Record<Language, string>> = {
@@ -121,23 +122,111 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem('lang');
       if (saved === 'ES' || saved === 'EN') return saved;
     }
-    return 'ES'; // Default to Spanish
+    return 'ES';
   });
+
+  // Tracks whether a language-switch transition overlay is active
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  // The "incoming" language label shown during the overlay
+  const [pendingLang, setPendingLang] = useState<Language | null>(null);
 
   useEffect(() => {
     localStorage.setItem('lang', lang);
   }, [lang]);
 
-  const toggleLang = (l: Language) => setLang(l);
+  const toggleLang = useCallback((l: Language) => {
+    if (l === lang || isTransitioning) return;
+
+    // 1. Show overlay with incoming language
+    setPendingLang(l);
+    setIsTransitioning(true);
+
+    // 2. Swap content mid-animation so it's ready when overlay lifts
+    setTimeout(() => setLang(l), 700);
+
+    // 3. Hide overlay after full animation
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setPendingLang(null);
+    }, 1600);
+  }, [lang, isTransitioning]);
 
   const t = (key: string) => {
     return translations[key]?.[lang] || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ lang, toggleLang, t }}>
+    <LanguageContext.Provider value={{ lang, toggleLang, t, isTransitioning }}>
       {children}
+      {/* Language transition overlay — lives here so it's above everything */}
+      <LangTransitionOverlay active={isTransitioning} incoming={pendingLang} />
     </LanguageContext.Provider>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Inline overlay component (keeps it co-located, no circular imports)
+// ---------------------------------------------------------------------------
+import { AnimatePresence, motion } from 'framer-motion';
+
+function LangTransitionOverlay({
+  active,
+  incoming,
+}: {
+  active: boolean;
+  incoming: Language | null;
+}) {
+  const label = incoming === 'EN' ? 'English' : 'Español';
+
+  return (
+    <AnimatePresence>
+      {active && (
+        <motion.div
+          key="lang-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: 'easeInOut' }}
+          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-background pointer-events-none"
+        >
+          <div className="flex overflow-hidden relative pb-4">
+            {label.split('').map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.33, 1, 0.68, 1],
+                  delay: i * 0.045,
+                }}
+                className="font-display text-5xl md:text-7xl text-foreground"
+              >
+                {char}
+              </motion.span>
+            ))}
+
+            {/* Growing line */}
+            <motion.div
+              initial={{ width: '0%' }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 1.3, ease: 'easeInOut' }}
+              className="absolute bottom-0 left-0 h-[1px] bg-foreground/30"
+            />
+          </div>
+
+          {/* Language badge */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
+            className="font-sans text-xs uppercase tracking-widest text-muted-foreground mt-6"
+          >
+            {incoming === 'EN' ? 'Switching to English' : 'Cambiando a Español'}
+          </motion.p>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
