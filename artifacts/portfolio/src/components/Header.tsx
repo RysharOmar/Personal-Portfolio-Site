@@ -56,7 +56,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/">
             <div className="flex cursor-pointer items-center gap-3 group">
-              <SynapseSentinelIcon size={32} />
+              <SynapseSentinelIcon size={44} />
               <span className="font-display text-xl text-foreground group-hover:text-primary transition-colors duration-200 hidden sm:inline">
                 Synapse Sentinel
               </span>

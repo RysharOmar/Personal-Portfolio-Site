@@ -1,10 +1,5 @@
 import React from 'react';
 
-/**
- * Inline SVG of the Synapse Sentinel brain+shield mark.
- * The icon uses currentColor so it adapts to any text color context,
- * but accepts an explicit `color` prop for the terracotta version.
- */
 export function SynapseSentinelIcon({
   size = 40,
   color = '#AA5022',
@@ -17,55 +12,97 @@ export function SynapseSentinelIcon({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 64"
+      viewBox="0 0 100 105"
       width={size}
-      height={size}
+      height={Math.round(size * 1.05)}
       className={className}
       aria-label="Synapse Sentinel"
       fill="none"
     >
-      {/* Shield outline */}
-      <path
-        d="M32 4 L58 14 L58 40 Q58 58 32 66 Q6 58 6 40 L6 14 Z"
-        stroke={color}
-        strokeWidth="3"
-        strokeLinejoin="round"
+      {/* ── CENTER DIVIDER ── */}
+      <line
+        x1="50" y1="6" x2="50" y2="99"
+        stroke={color} strokeWidth="2.8" strokeLinecap="round"
       />
 
-      {/* Vertical center divider */}
-      <line x1="32" y1="5" x2="32" y2="65" stroke={color} strokeWidth="2.2" />
-
-      {/* LEFT: Brain — organic, extends beyond shield left edge */}
+      {/* ── RIGHT HALF: Shield outline (half-shield, right side only) ── */}
       <path
-        d="M30 16
-           Q30 9 23 9
-           Q13 9 11 18
-           Q4 18 4 27
-           Q4 37 14 39
-           Q12 46 17 52
-           Q21 58 29 55
-           Q32 53 32 47"
-        stroke={color}
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M50,6 Q67,4 80,16 Q92,28 90,52 Q88,72 74,86 Q64,96 50,100"
+        stroke={color} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round"
       />
-      {/* Brain fold arcs */}
-      <path d="M11 23 Q18 19 27 23" stroke={color} strokeWidth="2" strokeLinecap="round" />
-      <path d="M9 33 Q16 29 25 33"  stroke={color} strokeWidth="2" strokeLinecap="round" />
-      <path d="M14 47 Q20 43 28 47" stroke={color} strokeWidth="2" strokeLinecap="round" />
 
-      {/* RIGHT: Circuit traces */}
-      <circle cx="32" cy="35" r="2.2" fill={color} />
-      {/* Trace upper-right */}
-      <line x1="33" y1="33" x2="44" y2="23" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-      <circle cx="46" cy="21" r="4" fill={color} />
-      {/* Trace right */}
-      <line x1="34" y1="35" x2="49" y2="35" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-      <circle cx="52" cy="35" r="4" fill={color} />
-      {/* Trace lower-right */}
-      <line x1="33" y1="37" x2="44" y2="48" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-      <circle cx="46" cy="50" r="4" fill={color} />
+      {/*
+        ── RIGHT HALF: Circuit ──
+        Vertical trunk from which 3 horizontal branches extend right.
+        Each branch ends in a filled circle.
+        A short horizontal connector leads from the center line to the trunk.
+      */}
+      {/* Connector: center → trunk */}
+      <line
+        x1="50" y1="52" x2="60" y2="52"
+        stroke={color} strokeWidth="2.8" strokeLinecap="round"
+      />
+      {/* Vertical trunk */}
+      <line
+        x1="60" y1="34" x2="60" y2="70"
+        stroke={color} strokeWidth="2.8" strokeLinecap="round"
+      />
+      {/* Top branch */}
+      <line
+        x1="60" y1="34" x2="80" y2="34"
+        stroke={color} strokeWidth="2.8" strokeLinecap="round"
+      />
+      <circle cx="84" cy="34" r="4" fill={color} />
+      {/* Middle branch (longest) */}
+      <line
+        x1="60" y1="52" x2="82" y2="52"
+        stroke={color} strokeWidth="2.8" strokeLinecap="round"
+      />
+      <circle cx="86" cy="52" r="4" fill={color} />
+      {/* Bottom branch */}
+      <line
+        x1="60" y1="70" x2="80" y2="70"
+        stroke={color} strokeWidth="2.8" strokeLinecap="round"
+      />
+      <circle cx="84" cy="70" r="4" fill={color} />
+
+      {/*
+        ── LEFT HALF: Brain ──
+        Organic, cloud-like silhouette with two round upper lobes
+        and two smaller lower lobes. Extends significantly left of
+        the shield edge. Includes a horizontal fold line in the middle.
+      */}
+      {/* Main outer path — two top lobes + bottom lobes */}
+      <path
+        d="
+          M 50,16
+          C 46,8 38,4 30,6
+          C 22,6 16,10 14,18
+          C 6,18 2,26 4,36
+          C 0,44 4,56 12,60
+          C 8,70 14,82 26,86
+          C 36,90 46,84 50,74
+        "
+        stroke={color} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round"
+      />
+
+      {/* Indentation between the two upper lobes */}
+      <path
+        d="M 28,8 Q 34,16 42,12"
+        stroke={color} strokeWidth="2.2" strokeLinecap="round"
+      />
+
+      {/* Horizontal middle fold (classic brain crease) */}
+      <path
+        d="M 6,46 Q 18,40 32,46 Q 40,49 48,46"
+        stroke={color} strokeWidth="2.2" strokeLinecap="round"
+      />
+
+      {/* Bottom lobe indentation */}
+      <path
+        d="M 18,84 Q 28,76 38,80"
+        stroke={color} strokeWidth="2.2" strokeLinecap="round"
+      />
     </svg>
   );
 }
