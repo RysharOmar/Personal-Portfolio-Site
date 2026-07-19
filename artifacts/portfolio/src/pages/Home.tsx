@@ -3,154 +3,108 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageTransition } from '@/components/PageTransition';
-import { Marquee } from '@/components/Marquee';
+
+function ArrowCTA({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href}>
+      <motion.div
+        className="group flex flex-col gap-2 cursor-pointer w-fit"
+        initial="rest"
+        whileHover="hover"
+        animate="rest"
+      >
+        {/* Label + arrow row */}
+        <div className="flex items-center gap-3">
+          <span className="font-sans text-base md:text-lg tracking-wide text-foreground group-hover:text-primary transition-colors duration-300">
+            {label}
+          </span>
+          {/* Arrow */}
+          <motion.span
+            className="text-foreground group-hover:text-primary transition-colors duration-300 text-xl leading-none"
+            variants={{
+              rest: { x: 0 },
+              hover: { x: 6 },
+            }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          >
+            →
+          </motion.span>
+        </div>
+
+        {/* Loading-bar underline */}
+        <div className="h-[1.5px] w-full bg-foreground/15 relative overflow-hidden">
+          <motion.div
+            className="absolute inset-y-0 left-0 bg-primary"
+            variants={{
+              rest: { width: '0%' },
+              hover: { width: '100%' },
+            }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+          />
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
 
 export default function Home() {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
 
-  const marquee1 = lang === 'ES' 
-    ? ["Ciberseguridad", "Automatización IA", "Integraciones CRM", "Desarrollo Web", "APIs & Bases de Datos", "Python · Node.js · React"]
-    : ["Cybersecurity", "AI Automation", "CRM Integrations", "Web Development", "APIs & Databases", "Python · Node.js · React"];
-    
-  const marquee2 = ["Salesforce", "GPT-4", "SAP B1", "PostgreSQL", "OpenAI", "WhatsApp API", "Splunk", "Node.js"];
+  const headline =
+    lang === 'ES'
+      ? 'Arquitectura,\nSeguridad y\nAutomatización.'
+      : 'Architecture,\nSecurity &\nAutomation.';
+
+  const body =
+    lang === 'ES'
+      ? 'Combino tácticas de ciberseguridad ofensiva con desarrollo full-stack para construir sistemas que no solo funcionan, sino que resisten. Mi enfoque está en automatizar flujos de trabajo críticos de negocio integrando IA, CRMs y bases de datos legacy sin comprometer la seguridad.\n\nEntiendo el lenguaje de los hackers y el de las juntas directivas. Mientras otros ensamblan componentes, yo diseño infraestructuras resilientes pensadas para escalar.'
+      : 'I combine offensive cybersecurity tactics with full-stack development to build systems that don\'t just work — they endure. My focus is on automating critical business workflows by integrating AI, CRMs, and legacy databases without compromising security.\n\nI speak the language of hackers and boardrooms alike. While others assemble components, I design resilient infrastructures built to scale.';
+
+  const seeProjects = lang === 'ES' ? 'Ver mis proyectos' : 'See my projects';
+  const aboutMe = lang === 'ES' ? 'Más sobre mí' : 'More about me';
 
   return (
     <PageTransition>
-      <div className="flex flex-col w-full">
-        
-        {/* Section 1: Hero */}
-        <section className="relative min-h-[100dvh] w-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
-          
-          {/* Top-left label */}
-          <div className="absolute top-24 left-8 md:left-16 lg:left-24 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-            <span className="font-sans text-xs tracking-widest uppercase text-muted-foreground">
-              {lang === 'ES' ? 'Disponible para proyectos' : 'Available for projects'}
-            </span>
-          </div>
+      <section className="relative min-h-[100dvh] w-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div className="max-w-3xl">
+          {/* Headline */}
+          <motion.h1
+            className="font-display text-6xl md:text-8xl lg:text-[7rem] leading-[1] mb-10 text-foreground whitespace-pre-line"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {headline}
+          </motion.h1>
 
-          {/* Top-right sticky note (desktop only) */}
-          <div className="absolute top-32 right-8 md:right-16 lg:right-24 hidden lg:block rotate-3">
-            <div className="bg-accent text-accent-foreground px-4 py-3 shadow-lg flex items-center gap-2">
-              <span className="font-sans text-sm font-medium">
-                {lang === 'ES' ? 'Solo 3 slots / mes' : 'Only 3 slots / month'}
-              </span>
-              <span className="text-xs">✦</span>
-            </div>
-          </div>
-
-          {/* Main content */}
-          <div className="max-w-4xl mt-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              <p className="font-sans text-sm uppercase tracking-widest text-muted-foreground mb-8">
-                {lang === 'ES' ? 'Ingeniería · Seguridad · Automatización' : 'Engineering · Security · Automation'}
-              </p>
-              <h1 className="font-display text-6xl md:text-8xl lg:text-[9rem] leading-[0.9] mb-8 text-foreground">
-                {lang === 'ES' ? (
-                  <>Construyo sistemas que no solo funcionan, sino que resisten.</>
-                ) : (
-                  <>I build systems that don't just work — they endure.</>
-                )}
-              </h1>
-              <p className="font-sans text-xl text-muted-foreground max-w-lg mb-12">
-                {lang === 'ES' 
-                  ? 'Ing. en Ciberseguridad & Desarrollador Web especializado en automatización con IA.'
-                  : 'Cybersecurity Engineer & Web Developer specialized in AI automation.'}
-              </p>
-              
-              <Link href="/contact" className="inline-block border-b border-foreground pb-1 text-lg font-medium hover:border-primary hover:text-primary transition-colors">
-                {lang === 'ES' ? 'Solicitar Consultoría →' : 'Book a Consultation →'}
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Scroll indicator */}
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-            <div className="w-[1px] h-10 bg-foreground/30 overflow-hidden">
-              <motion.div
-                className="w-full h-full bg-foreground"
-                animate={{ y: ['-100%', '100%'] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              />
-            </div>
-          </div>
-        </section>
-
-        <Marquee items={marquee1} speed={30} direction="left" />
-
-        {/* Section 2: Stats */}
-        <section className="w-full py-24 px-8 md:px-16 lg:px-24">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between border-y border-foreground/10 divide-y md:divide-y-0 md:divide-x divide-foreground/10">
-            {[
-              { num: "50+", label: lang === 'ES' ? 'proyectos completados' : 'projects completed' },
-              { num: "8", label: lang === 'ES' ? 'años de experiencia' : 'years of experience' },
-              { num: "2M+", label: lang === 'ES' ? 'registros procesados' : 'records processed' }
-            ].map((stat, i) => (
-              <motion.div 
+          {/* Body */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {body.split('\n\n').map((para, i) => (
+              <p
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="flex-1 w-full flex flex-col items-center justify-center py-16 px-4"
+                className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed mb-5 max-w-2xl"
               >
-                <h3 className="font-display text-7xl text-primary mb-4">{stat.num}</h3>
-                <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground text-center">
-                  {stat.label}
-                </p>
-              </motion.div>
+                {para}
+              </p>
             ))}
-          </div>
-        </section>
+          </motion.div>
 
-        {/* Section 3: Selected Work */}
-        <section className="w-full py-24 px-8 md:px-16 lg:px-24">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="font-sans text-sm uppercase tracking-widest text-muted-foreground mb-16">
-              {lang === 'ES' ? 'Trabajo Seleccionado' : 'Selected Work'}
-            </h2>
-            
-            <div className="flex flex-col border-t border-foreground/10">
-              {[
-                { id: "01", title: lang === 'ES' ? 'Pipeline de Leads con IA' : 'AI Lead Pipeline', tag: 'CRM' },
-                { id: "02", title: lang === 'ES' ? 'Sincronización ERP ↔ eCommerce' : 'ERP ↔ eCommerce Sync', tag: 'ERP' },
-                { id: "03", title: lang === 'ES' ? 'ETL Inteligente para BBDD Legada' : 'Smart ETL for Legacy DB', tag: 'BBDD' }
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                >
-                  <Link href="/work" className="group flex flex-col md:flex-row md:items-center py-8 md:py-12 border-b border-foreground/10 hover:bg-accent/10 transition-colors px-4 -mx-4 md:px-8 md:-mx-8">
-                    <span className="font-sans text-xs text-muted-foreground w-12 mb-4 md:mb-0">{item.id}</span>
-                    <h3 className="font-display text-3xl md:text-5xl flex-1 group-hover:translate-x-2 transition-transform duration-300">
-                      {item.title}
-                    </h3>
-                    <span className="font-sans text-sm tracking-wider text-muted-foreground mt-4 md:mt-0">
-                      {item.tag}
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-16 flex justify-center">
-              <Link href="/work" className="border-b border-foreground pb-1 text-lg font-medium hover:border-primary hover:text-primary transition-colors">
-                {lang === 'ES' ? 'Ver todos los proyectos →' : 'View all projects →'}
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <Marquee items={marquee2} speed={35} direction="right" />
-        
-      </div>
+          {/* CTAs */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-6 mt-10"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <ArrowCTA href="/work" label={seeProjects} />
+            <ArrowCTA href="/about" label={aboutMe} />
+          </motion.div>
+        </div>
+      </section>
     </PageTransition>
   );
 }
