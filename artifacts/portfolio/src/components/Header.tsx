@@ -4,7 +4,6 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Sun, Moon, Menu, X, Home, User, Briefcase, Mail } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { SynapseSentinelIcon } from '@/components/SynapseSentinelIcon';
 
 const navItems = [
   { href: '/', labelKey: 'nav.home', icon: Home },
@@ -56,7 +55,11 @@ export function Header() {
           {/* Logo */}
           <Link href="/">
             <div className="flex cursor-pointer items-center gap-3 group">
-              <SynapseSentinelIcon size={44} />
+              <img
+                src="/synapse-sentinel.ico"
+                alt="Synapse Sentinel"
+                className="h-12 w-12 object-contain"
+              />
               <span className="font-display text-xl text-foreground group-hover:text-primary transition-colors duration-200 hidden sm:inline">
                 Synapse Sentinel
               </span>
