@@ -65,11 +65,12 @@ export default function Home() {
 
   return (
     <PageTransition>
-      <section className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center px-8 text-center md:px-16 lg:px-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="relative flex h-[100dvh] max-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden px-5 pb-5 pt-16 text-center sm:px-8 md:px-16 lg:px-24">
+        <div className="mx-auto w-full max-w-5xl">
           {/* Editorial headline */}
           <motion.h1
-            className="mb-10 whitespace-pre-line font-display text-5xl leading-[0.95] text-foreground md:text-7xl lg:text-[7rem]"
+            className="mb-5 whitespace-pre-line font-display leading-[0.9] text-foreground md:mb-7"
+            style={{ fontSize: 'clamp(2.25rem, 7.2vw, 7rem)' }}
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -83,14 +84,17 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="mx-auto max-w-4xl font-sans text-base leading-relaxed text-muted-foreground md:text-xl">
+            <p
+              className="mx-auto max-w-4xl font-sans leading-[1.45] text-muted-foreground"
+              style={{ fontSize: 'clamp(0.875rem, 1.35vw, 1.25rem)' }}
+            >
               {body}
             </p>
           </motion.div>
 
           {/* CTAs */}
           <motion.div
-            className="mt-10 flex flex-row justify-center gap-12"
+            className="mt-6 flex flex-row justify-center gap-8 sm:gap-12 md:mt-8"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
