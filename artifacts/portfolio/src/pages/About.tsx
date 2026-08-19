@@ -46,10 +46,10 @@ export default function About() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="mb-10 w-full md:mb-14">
-              <span className="font-sans text-xs uppercase tracking-[0.28em] text-muted-foreground">
+              <span className="font-display text-4xl leading-none text-primary md:text-6xl">
                 {copy.sectionLabel}
               </span>
-              <div className="mt-4 h-px w-full bg-foreground/20" />
+              <div className="mt-6 h-[2px] w-full bg-foreground/20" />
             </div>
 
             <h1 className="max-w-3xl font-sans text-lg font-normal leading-[1.65] text-foreground md:text-xl">
