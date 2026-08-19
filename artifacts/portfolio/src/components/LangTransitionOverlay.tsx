@@ -21,9 +21,9 @@ export function LangTransitionOverlay({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: 'easeInOut' }}
-          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-background pointer-events-none"
+          className="fixed inset-0 z-[10000] flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden bg-background px-4 pointer-events-none sm:px-6"
         >
-          <div className="flex overflow-hidden relative pb-4">
+          <div className="relative flex max-w-full overflow-hidden whitespace-nowrap pb-3 sm:pb-4">
             {label.split('').map((char, i) => (
               <motion.span
                 key={i}
@@ -34,7 +34,7 @@ export function LangTransitionOverlay({
                   ease: [0.33, 1, 0.68, 1],
                   delay: i * 0.045,
                 }}
-                className="font-display text-5xl md:text-7xl text-foreground"
+                className="font-display text-[clamp(2.5rem,12vw,4.5rem)] leading-[0.9] text-foreground"
               >
                 {char}
               </motion.span>
@@ -53,7 +53,7 @@ export function LangTransitionOverlay({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.4 }}
-            className="font-sans text-xs uppercase tracking-widest text-muted-foreground mt-6"
+            className="mt-5 max-w-full px-2 text-center font-sans text-[10px] uppercase tracking-[0.12em] text-muted-foreground sm:mt-6 sm:text-xs sm:tracking-widest"
           >
             {incoming === 'EN' ? 'Switching to English' : 'Cambiando a Español'}
           </motion.p>

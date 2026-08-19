@@ -29,32 +29,33 @@ export function Preloader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7, ease: 'easeInOut' }}
-          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-background gap-6"
+          className="fixed inset-0 z-[10000] flex min-h-dvh w-full flex-col items-center justify-center gap-5 overflow-hidden bg-background px-4 sm:gap-6 sm:px-6"
         >
           {/* Synapse Sentinel mark from the approved brand asset */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+            className="shrink-0"
           >
             <img
-              src="/synapse-sentinel.ico"
+              src="/synapse-favicon.png"
               alt="Synapse Sentinel"
-              className="h-20 w-20 object-contain md:h-24 md:w-24"
+              className="h-16 w-16 rounded-full object-contain sm:h-20 sm:w-20 md:h-24 md:w-24"
             />
           </motion.div>
 
           {/* Text block */}
-          <div className="flex flex-col items-center relative pb-4">
+          <div className="relative flex max-w-full flex-col items-center pb-3 sm:pb-4">
             {/* "Synapse" line */}
-            <div className="flex overflow-hidden">
+            <div className="flex max-w-full overflow-hidden whitespace-nowrap">
               {word1.split('').map((char, i) => (
                 <motion.span
                   key={`w1-${i}`}
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1], delay: 0.15 + i * 0.045 }}
-                  className="font-display text-5xl md:text-7xl text-foreground"
+                  className="font-display text-[clamp(2.75rem,14vw,4.5rem)] leading-[0.9] text-foreground"
                 >
                   {char}
                 </motion.span>
@@ -62,14 +63,14 @@ export function Preloader() {
             </div>
 
             {/* "Sentinel" line */}
-            <div className="flex overflow-hidden">
+            <div className="flex max-w-full overflow-hidden whitespace-nowrap">
               {word2.split('').map((char, i) => (
                 <motion.span
                   key={`w2-${i}`}
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1], delay: 0.55 + i * 0.04 }}
-                  className="font-display text-5xl md:text-7xl text-foreground"
+                  className="font-display text-[clamp(2.75rem,14vw,4.5rem)] leading-[0.9] text-foreground"
                 >
                   {char}
                 </motion.span>
@@ -90,7 +91,7 @@ export function Preloader() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.5 }}
-            className="font-sans text-xs uppercase tracking-widest text-muted-foreground"
+            className="max-w-full px-2 text-center font-sans text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-xs sm:tracking-widest"
           >
             Inteligencia · Seguridad · Autonomía
           </motion.p>
