@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SynapseSentinelIcon } from '@/components/SynapseSentinelIcon';
 
 export function Preloader() {
   const [visible, setVisible] = useState(true);
@@ -32,13 +31,17 @@ export function Preloader() {
           transition={{ duration: 0.7, ease: 'easeInOut' }}
           className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-background gap-6"
         >
-          {/* Icon */}
+          {/* Synapse Sentinel mark from the approved brand asset */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
           >
-            <SynapseSentinelIcon size={56} />
+            <img
+              src="/synapse-sentinel.ico"
+              alt="Synapse Sentinel"
+              className="h-20 w-20 object-contain md:h-24 md:w-24"
+            />
           </motion.div>
 
           {/* Text block */}

@@ -10,6 +10,7 @@ export default function About() {
 
   const copy = isSpanish
     ? {
+        sectionLabel: 'Sobre mí',
         intro: 'Hola, soy Ryshar Nuñez. Construyo sistemas que tu negocio no puede permitirse que fallen.',
         paragraphs: [
           'Soy desarrollador full-stack con foco en automatización de procesos críticos. Combino ciberseguridad ofensiva y desarrollo full-stack para diseñar infraestructuras que no solo funcionan: resisten. Integro IA, CRMs y bases de datos legacy sin abrir brechas.',
@@ -22,6 +23,7 @@ export default function About() {
         cv: 'Descargar CV',
       }
     : {
+        sectionLabel: 'About',
         intro: "Hi, I'm Ryshar Nuñez. I build systems your business cannot afford to let fail.",
         paragraphs: [
           'I am a full-stack developer focused on automating critical processes. I combine offensive cybersecurity with full-stack development to design infrastructure that does not just work: it withstands. I integrate AI, CRMs, and legacy databases without opening new vulnerabilities.',
@@ -43,7 +45,14 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="max-w-4xl font-display text-5xl leading-[0.98] text-foreground md:text-7xl lg:text-8xl">
+            <div className="mb-10 w-full md:mb-14">
+              <span className="font-sans text-xs uppercase tracking-[0.28em] text-muted-foreground">
+                {copy.sectionLabel}
+              </span>
+              <div className="mt-4 h-px w-full bg-foreground/20" />
+            </div>
+
+            <h1 className="max-w-3xl font-sans text-lg font-normal leading-[1.65] text-foreground md:text-xl">
               {copy.intro}
             </h1>
 
