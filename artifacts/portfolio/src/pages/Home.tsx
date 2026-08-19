@@ -50,52 +50,32 @@ function ArrowCTA({ href, label }: { href: string; label: string }) {
 export default function Home() {
   const { lang } = useLanguage();
 
-  const headline =
-    lang === 'ES'
-      ? 'Arquitectura,\nSeguridad y\nAutomatización.'
-      : 'Architecture,\nSecurity &\nAutomation.';
-
   const body =
     lang === 'ES'
-      ? 'Combino tácticas de ciberseguridad ofensiva con desarrollo full-stack para construir sistemas que no solo funcionan, sino que resisten. Mi enfoque está en automatizar flujos de trabajo críticos de negocio integrando IA, CRMs y bases de datos legacy sin comprometer la seguridad.\n\nEntiendo el lenguaje de los hackers y el de las juntas directivas. Mientras otros ensamblan componentes, yo diseño infraestructuras resilientes pensadas para escalar.'
-      : 'I combine offensive cybersecurity tactics with full-stack development to build systems that don\'t just work — they endure. My focus is on automating critical business workflows by integrating AI, CRMs, and legacy databases without compromising security.\n\nI speak the language of hackers and boardrooms alike. While others assemble components, I design resilient infrastructures built to scale.';
+      ? 'Hola, soy Ryshar Nuñez. Construyo sistemas que tu negocio no puede permitirse que fallen. Combino desarrollo full-stack y ciberseguridad ofensiva para automatizar procesos críticos: IA, CRMs y bases de datos legacy integrados sin abrir brechas. Hablo el idioma de los hackers y de las juntas directivas, y diseño infraestructuras resilientes desde el primer día, no como parche. Trabajo con pocos proyectos a la vez, solo de alto impacto y tolerancia cero al fallo. Si tu operación no puede parar, hablemos.'
+      : 'Hi, I\'m Ryshar Nuñez. I build systems your business cannot afford to let fail. I combine full-stack development and offensive cybersecurity to automate critical processes: AI, CRMs, and legacy databases integrated without opening vulnerabilities. I speak the language of hackers and boardrooms, and I design resilient infrastructure from day one, not as a patch. I work with only a few projects at a time, focused on high impact and zero tolerance for failure. If your operation cannot stop, let\'s talk.';
 
   const seeProjects = lang === 'ES' ? 'Ver mis proyectos' : 'See my projects';
   const aboutMe = lang === 'ES' ? 'Más sobre mí' : 'More about me';
 
   return (
     <PageTransition>
-      <section className="relative min-h-[100dvh] w-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
-        <div className="max-w-3xl">
-          {/* Headline */}
-          <motion.h1
-            className="font-display text-6xl md:text-8xl lg:text-[7rem] leading-[1] mb-10 text-foreground whitespace-pre-line"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {headline}
-          </motion.h1>
-
-          {/* Body */}
+      <section className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center px-8 text-center md:px-16 lg:px-24">
+        <div className="mx-auto max-w-4xl">
+          {/* Introductory copy */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            {body.split('\n\n').map((para, i) => (
-              <p
-                key={i}
-                className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed mb-5 max-w-2xl"
-              >
-                {para}
-              </p>
-            ))}
+            <p className="mx-auto max-w-4xl font-sans text-base leading-relaxed text-muted-foreground md:text-xl">
+              {body}
+            </p>
           </motion.div>
 
           {/* CTAs */}
           <motion.div
-            className="flex flex-row gap-12 mt-10"
+            className="mt-10 flex flex-row justify-center gap-12"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
