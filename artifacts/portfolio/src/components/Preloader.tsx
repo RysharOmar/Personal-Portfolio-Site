@@ -48,7 +48,7 @@ export function Preloader() {
           {/* Text block */}
           <div className="relative flex max-w-full flex-col items-center pb-3 sm:pb-4">
             {/* "Synapse" line */}
-            <div className="mt-1 flex max-w-full overflow-hidden whitespace-nowrap sm:mt-2">
+            <div className="flex max-w-full overflow-hidden whitespace-nowrap">
               {word1.split('').map((char, i) => (
                 <motion.span
                   key={`w1-${i}`}
@@ -63,7 +63,7 @@ export function Preloader() {
             </div>
 
             {/* "Sentinel" line */}
-            <div className="flex max-w-full overflow-hidden whitespace-nowrap">
+            <div className="mt-4 flex max-w-full overflow-hidden whitespace-nowrap sm:mt-5">
               {word2.split('').map((char, i) => (
                 <motion.span
                   key={`w2-${i}`}
