@@ -5,15 +5,8 @@ export function Preloader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const hasSeenPreloader = sessionStorage.getItem('hasSeenPreloader');
-    if (hasSeenPreloader) {
-      setVisible(false);
-      return;
-    }
-
     const timer = setTimeout(() => {
       setVisible(false);
-      sessionStorage.setItem('hasSeenPreloader', 'true');
     }, 2800);
 
     return () => clearTimeout(timer);
