@@ -48,14 +48,14 @@ export function Preloader() {
           {/* Text block */}
           <div className="relative flex max-w-full flex-col items-center pb-3 sm:pb-4">
             {/* "Synapse" line */}
-            <div className="flex max-w-full overflow-hidden whitespace-nowrap">
+            <div className="flex max-w-full overflow-visible whitespace-nowrap">
               {word1.split('').map((char, i) => (
                 <motion.span
                   key={`w1-${i}`}
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1], delay: 0.15 + i * 0.045 }}
-                  className="font-display text-[clamp(2.75rem,14vw,4.5rem)] leading-none text-foreground"
+                  className="font-display text-[clamp(2.75rem,14vw,4.5rem)] leading-[1.08] text-foreground"
                 >
                   {char}
                 </motion.span>
@@ -63,14 +63,14 @@ export function Preloader() {
             </div>
 
             {/* "Sentinel" line */}
-            <div className="mt-8 flex max-w-full overflow-hidden whitespace-nowrap sm:mt-10">
+            <div className="mt-8 flex max-w-full overflow-visible whitespace-nowrap sm:mt-10">
               {word2.split('').map((char, i) => (
                 <motion.span
                   key={`w2-${i}`}
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1], delay: 0.55 + i * 0.04 }}
-                  className="font-display text-[clamp(2.75rem,14vw,4.5rem)] leading-none text-foreground"
+                  className="font-display text-[clamp(2.75rem,14vw,4.5rem)] leading-[1.08] text-foreground"
                 >
                   {char}
                 </motion.span>
