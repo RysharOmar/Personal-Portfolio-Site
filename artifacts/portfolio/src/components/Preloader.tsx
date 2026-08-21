@@ -39,9 +39,9 @@ export function Preloader() {
             className="shrink-0"
           >
             <img
-              src="/synapse-favicon.png"
+              src="/synapse-preloader.png"
               alt="Synapse Sentinel"
-              className="h-16 w-16 rounded-full object-contain sm:h-20 sm:w-20 md:h-24 md:w-24"
+              className="h-16 w-16 object-contain sm:h-20 sm:w-20 md:h-24 md:w-24"
             />
           </motion.div>
 
