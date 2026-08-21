@@ -63,7 +63,7 @@ export function Preloader() {
             </div>
 
             {/* "Sentinel" line */}
-            <div className="mt-8 flex max-w-full overflow-visible whitespace-nowrap sm:mt-10">
+            <div className="mt-5 flex max-w-full overflow-visible whitespace-nowrap sm:mt-6">
               {word2.split('').map((char, i) => (
                 <motion.span
                   key={`w2-${i}`}
