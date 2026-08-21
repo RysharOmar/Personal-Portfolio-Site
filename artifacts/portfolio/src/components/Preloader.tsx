@@ -41,14 +41,14 @@ export function Preloader() {
             <img
               src="/synapse-preloader.png"
               alt="Synapse Sentinel"
-              className="h-16 w-16 object-contain sm:h-20 sm:w-20 md:h-24 md:w-24"
+              className="h-20 w-20 object-contain sm:h-24 sm:w-24 md:h-28 md:w-28"
             />
           </motion.div>
 
           {/* Text block */}
           <div className="relative flex max-w-full flex-col items-center pb-3 sm:pb-4">
             {/* "Synapse" line */}
-            <div className="flex max-w-full overflow-hidden whitespace-nowrap">
+            <div className="mt-1 flex max-w-full overflow-hidden whitespace-nowrap sm:mt-2">
               {word1.split('').map((char, i) => (
                 <motion.span
                   key={`w1-${i}`}
