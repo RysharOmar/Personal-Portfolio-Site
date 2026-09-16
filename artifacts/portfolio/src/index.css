@@ -173,11 +173,9 @@ body::after {
 @keyframes dialog-content-close {
   from {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
   }
   to {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.99);
   }
 }
 
@@ -187,7 +185,7 @@ body::after {
 
 .dialog-content[data-state='closed'] {
   animation: dialog-content-close 0.5s ease-in-out both;
-  will-change: opacity, transform;
+  will-change: opacity;
 }
 
 @keyframes dialog-overlay-close {
