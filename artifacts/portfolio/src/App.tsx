@@ -2,32 +2,33 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Preloader } from '@/components/Preloader';
 import { NeonCursor } from '@/components/NeonCursor';
 import { Header } from '@/components/Header';
-const Home = lazy(() => import('@/pages/Home'));
-const About = lazy(() => import('@/pages/About'));
-const Work = lazy(() => import('@/pages/Work'));
-const ProjectDetail = lazy(() => import('@/pages/ProjectDetail'));
-const Contact = lazy(() => import('@/pages/Contact'));
-const NotFound = lazy(() => import('@/pages/not-found'));
+const loadHome = () => import('@/pages/Home');
+const loadAbout = () => import('@/pages/About');
+const loadWork = () => import('@/pages/Work');
+const loadProjectDetail = () => import('@/pages/ProjectDetail');
+const loadContact = () => import('@/pages/Contact');
+const loadNotFound = () => import('@/pages/not-found');
+
+const Home = lazy(loadHome);
+const About = lazy(loadAbout);
+const Work = lazy(loadWork);
+const ProjectDetail = lazy(loadProjectDetail);
+const Contact = lazy(loadContact);
+const NotFound = lazy(loadNotFound);
 
 const queryClient = new QueryClient();
 
 function Router() {
   return (
     <Suspense
-      fallback={
-        <div className="flex min-h-[60vh] items-center justify-center">
-          <span className="font-sans text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Loading
-          </span>
-        </div>
-      }
+      fallback={null}
     >
       <Switch>
         <Route path="/" component={Home} />
@@ -42,6 +43,19 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    // Keep route chunks separate while fetching them quietly after first paint.
+    // This prevents a visible loading state when navigating between sections.
+    void Promise.all([
+      loadHome(),
+      loadAbout(),
+      loadWork(),
+      loadProjectDetail(),
+      loadContact(),
+      loadNotFound(),
+    ]);
+  }, []);
+
   return (
     <ThemeProvider>
       <LanguageProvider>

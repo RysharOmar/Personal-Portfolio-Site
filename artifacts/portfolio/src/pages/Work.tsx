@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageTransition } from '@/components/PageTransition';
 import { Marquee } from '@/components/Marquee';
@@ -219,11 +218,6 @@ export default function Work() {
                         {activeProjectData.tags.join(' · ')}
                       </p>
                     </div>
-                     <Link href={`/work/${activeProjectData.id}`}>
-                       <span className="inline-flex cursor-pointer border-b border-foreground pb-1 font-sans text-base font-medium text-foreground transition-colors hover:border-primary hover:text-primary">
-                         {lang === 'ES' ? 'Abrir caso completo' : 'Open full case'}
-                       </span>
-                     </Link>
                   </div>
                 </div>
               </>
