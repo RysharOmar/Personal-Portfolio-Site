@@ -170,3 +170,28 @@ body::after {
   animation: marquee-right linear infinite;
 }
 
+@keyframes dialog-content-close {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 8px)) scale(0.985);
+  }
+}
+
+.dialog-overlay[data-state='closed'] {
+  animation: dialog-overlay-close 0.5s ease-in-out both;
+}
+
+.dialog-content[data-state='closed'] {
+  animation: dialog-content-close 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+@keyframes dialog-overlay-close {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
