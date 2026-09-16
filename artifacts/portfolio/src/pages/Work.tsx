@@ -15,6 +15,7 @@ export default function Work() {
   const { t, lang } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const filters = [
     { id: 'All', label: t('work.filter.all') },
@@ -87,6 +88,11 @@ export default function Work() {
 
   const activeProjectData = projects.find(p => p.id === selectedProject);
 
+  const openProjectDetails = (projectId: number) => {
+    setSelectedProject(projectId);
+    setIsDialogOpen(true);
+  };
+
   return (
     <PageTransition>
       <div className="flex flex-col w-full">
@@ -151,7 +157,7 @@ export default function Work() {
                             {project.title}
                           </h2>
                           <button 
-                            onClick={() => setSelectedProject(project.id)}
+                            onClick={() => openProjectDetails(project.id)}
                             className="border-b border-foreground pb-1 text-lg font-medium hover:border-primary hover:text-primary transition-colors"
                           >
                             {t('work.card.btn')}
@@ -200,7 +206,7 @@ export default function Work() {
                             {project.tags.join(' · ')}
                           </div>
                           <button 
-                            onClick={() => setSelectedProject(project.id)}
+                            onClick={() => openProjectDetails(project.id)}
                             className="border-b border-foreground pb-1 text-lg font-medium hover:border-primary hover:text-primary transition-colors"
                           >
                             {t('work.card.btn')}
@@ -218,8 +224,18 @@ export default function Work() {
         <Marquee items={['Integraciones', 'Migraciones', 'APIs', 'Automatización', 'Seguridad']} speed={20} />
 
         {/* Detail Modal */}
-        <Dialog open={selectedProject !== null} onOpenChange={(open) => !open && setSelectedProject(null)}>
-          <DialogContent className="sm:max-w-[600px] border-border bg-background rounded-none shadow-2xl p-8">
+        <Dialog
+          open={isDialogOpen}
+          onOpenChange={setIsDialogOpen}
+        >
+          <DialogContent
+            className="sm:max-w-[600px] border-border bg-background rounded-none shadow-2xl p-8"
+            onAnimationEnd={(event) => {
+              if (event.currentTarget.dataset.state === 'closed') {
+                setSelectedProject(null);
+              }
+            }}
+          >
             {activeProjectData && (
               <>
                 <DialogHeader className="mb-8">
