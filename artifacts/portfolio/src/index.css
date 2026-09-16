@@ -177,7 +177,7 @@ body::after {
   }
   to {
     opacity: 0;
-    transform: translate(-50%, calc(-50% + 8px)) scale(0.985);
+    transform: translate(-50%, -50%) scale(0.99);
   }
 }
 
@@ -186,7 +186,7 @@ body::after {
 }
 
 .dialog-content[data-state='closed'] {
-  animation: dialog-content-close 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: dialog-content-close 0.5s ease-in-out both;
   will-change: opacity, transform;
 }
 
