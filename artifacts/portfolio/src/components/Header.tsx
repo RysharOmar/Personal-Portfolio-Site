@@ -123,7 +123,7 @@ export function Header() {
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ delay: i * 0.07, duration: 0.25 }}
                   >
-                    <Link href={item.href}>
+                    <Link href={item.href} onClick={() => setMenuOpen(false)}>
                       <div
                         className={`group flex cursor-pointer items-center gap-4 transition-all duration-200`}
                       >
@@ -144,15 +144,6 @@ export function Header() {
               })}
             </nav>
 
-            {/* Bottom hint */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="absolute bottom-10 font-sans text-xs text-muted-foreground tracking-widest uppercase"
-            >
-              {lang === 'ES' ? 'Esc para cerrar' : 'Press Esc to close'}
-            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
